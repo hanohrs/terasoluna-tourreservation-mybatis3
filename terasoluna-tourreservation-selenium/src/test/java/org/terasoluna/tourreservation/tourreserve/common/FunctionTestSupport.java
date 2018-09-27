@@ -15,6 +15,9 @@
  */
 package org.terasoluna.tourreservation.tourreserve.common;
 
+import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertThat;
+
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
@@ -36,9 +39,6 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.support.ApplicationObjectSupport;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertThat;
-
 import io.github.bonigarcia.wdm.FirefoxDriverManager;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -46,6 +46,9 @@ public abstract class FunctionTestSupport extends ApplicationObjectSupport {
 
     @Inject
     protected MessageSource messageSource;
+
+    @Inject
+    protected WebDriverEventListener webDriverListenerImpl;
 
     @Value("${selenium.applicationContextUrl}")
     protected String applicationContextUrl;
@@ -107,9 +110,8 @@ public abstract class FunctionTestSupport extends ApplicationObjectSupport {
         driver.get(applicationContextUrl + "?locale=" + locale.getLanguage());
 
         // WebDriverEventListenerを実行ドライバに登録
-        WebDriverEventListener waitWebDriverEventListener = new WebDriverListenerImpl();
         EventFiringWebDriver webDriver = new EventFiringWebDriver(driver);
-        webDriver.register(waitWebDriverEventListener);
+        webDriver.register(webDriverListenerImpl);
 
         return webDriver;
     }
