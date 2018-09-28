@@ -15,9 +15,6 @@
  */
 package org.terasoluna.tourreservation.tourreserve.common;
 
-import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertThat;
-
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
@@ -39,6 +36,8 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.support.ApplicationObjectSupport;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertThat;
 import io.github.bonigarcia.wdm.FirefoxDriverManager;
 
 @RunWith(SpringJUnit4ClassRunner.class)
